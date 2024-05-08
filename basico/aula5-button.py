@@ -38,7 +38,7 @@ def main(page: ft.Page):
             ft.MaterialState.DEFAULT: ft.BorderSide(width=1, color=ft.colors.BLACK),
         },
         shape={
-            ft.MaterialState.HOVERED: ft.RoundedRectangleBorder(radius=10),
+            ft.MaterialState.HOVERED: ft.RoundedRectangleBorder(radius=30),
             ft.MaterialState.DEFAULT: ft.BeveledRectangleBorder(radius=1),
 
         },

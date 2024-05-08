@@ -21,7 +21,7 @@ def main(page: ft.Page):
         border_radius=ft.border_radius.all(15),
         width=400,
         height=800,
-        bgcolor=ft.colors.WHITE,
+        bgcolor=ft.colors.BLUE,
 
         content=ft.Row(
             alignment=ft.MainAxisAlignment.CENTER,
@@ -33,6 +33,7 @@ def main(page: ft.Page):
             ]
         )
     )
+
 
     page.add(container)
 
