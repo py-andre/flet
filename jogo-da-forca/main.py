@@ -20,6 +20,7 @@ def letter_to_guess(letter):
 
 
 def main(page: ft.Page):
+    page.scroll = ft.ScrollMode.AUTO
     page.bgcolor = ft.colors.BROWN_600
 
     escolha_palavras = [
@@ -117,6 +118,8 @@ def main(page: ft.Page):
     scene = ft.Image(col=12, src='images/scene.png')
 
     layout = ft.ResponsiveRow(
+        alignment=ft.MainAxisAlignment.CENTER,
+        vertical_alignment=ft.CrossAxisAlignment.CENTER,
         columns=12,
         controls=[
             scene,
