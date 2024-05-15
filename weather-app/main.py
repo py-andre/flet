@@ -2,15 +2,21 @@
 import flet
 from flet import *
 import requests
+import json
 import datetime
 
 api_key = 'ee6a896666fbdddfd920656aa97cf902'
+city_name = 'Toronto,CA'
+link = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={api_key}&lang=pt_br'
 
-_current = requests.get(
-    f'http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={api_key}'
-)
+
+_current = requests.get(link)
+dados = _current.json()
+temperatura = dados['main']['temp'] - 273.15
+print(f'{temperatura:.2f}')
+
 # Listas de dias da semana
-day = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"]
+days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 
 def main(page: Page):
@@ -25,9 +31,16 @@ def main(page: Page):
         else:
             _c.content.controls[0].height = 660 * 0.40
             _c.content.controls[0].update()
-        pass
+
+    # current temp
+    '''def _current_temp():
+        _current_temp = int(_current.json()['current']['temp'])
+        return [_current_temp]'''
 
     def _top():
+        #
+        #_today = _current_temp()
+
         top = Container(
             width=310,
             height=660 * 0.40,
@@ -68,6 +81,36 @@ def main(page: Page):
                                         image_src='images/cloudy.png',
                                     )
                                 ]
+                            ),
+                            Column(
+                                spacing=5,
+                                horizontal_alignment='center',
+                                controls=[
+                                    Text(
+                                        'Today',
+                                        size=12,
+                                        text_align='center',
+                                    ),
+                                    Row(
+                                        vertical_alignment='center',
+                                        spacing=0,
+                                        controls=[
+                                            Container(
+                                                content=Text(
+                                                    # from requests
+                                                    #_today[0],
+                                                    value=f'{temperatura:.2f}',
+                                                    size=30,
+                                                    color=colors.WHITE,
+
+
+                                                ),
+                                            )
+                                        ]
+
+                                    )
+
+                                ]
                             )
                         ]
                     )
@@ -91,6 +134,8 @@ def main(page: Page):
         ),
 
     )
+
+
     page.add(_c)
 
 
